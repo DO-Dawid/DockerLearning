@@ -14,11 +14,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'appDockerLearning'
+    'appDockerLearning',
+    'rest_framework',
+    'corsheaders'
 ]
 
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -56,13 +59,14 @@ DATABASES = {
         'NAME': os.getenv('DB_NAME', 'master'),
         'USER': os.getenv('DB_USER', 'SA'),
         'PASSWORD': os.getenv('DB_PASSWORD', 'YourStrong_Password123'),
-        'HOST': os.getenv('DB_HOST', 'db'),
+        'HOST': os.getenv('DB_HOST', 'Docker-db'),
         'PORT': os.getenv('DB_PORT', '1433'),
         'OPTIONS': {
             'driver': 'ODBC Driver 17 for SQL Server',  # ważne!
         },
     }
 }
+CORS_ORIGIN_ALLOW_ALL = True
 
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'

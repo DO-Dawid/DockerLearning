@@ -3,7 +3,7 @@ version: '3.9'
 services:
   db:
     image: mcr.microsoft.com/mssql/server:2022-latest
-    container_name: cloud-db
+    container_name: Docker-db
     environment:
       SA_PASSWORD: "YourStrong_Password123"
       ACCEPT_EULA: "Y"
@@ -17,15 +17,16 @@ services:
     build:
       context: ./backend/DockerLearning/
       dockerfile: Dockerfile
-    container_name: cloud-backend
+    container_name: Docker-backend
     command: >
-      sh -c "python manage.py migrate &&
+      sh -c "python manage.py makemigrations &&
+             python manage.py migrate &&
              python manage.py runserver 0.0.0.0:8000"
     environment:
       DB_NAME: master
       DB_USER: SA
       DB_PASSWORD: "YourStrong_Password123"
-      DB_HOST: db
+      DB_HOST: Docker-db
       DB_PORT: "1433"
     depends_on:
       - db
@@ -38,7 +39,7 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
-    container_name: cloud-frontend
+    container_name: Docker-frontend
     depends_on:
       - backend
     ports:

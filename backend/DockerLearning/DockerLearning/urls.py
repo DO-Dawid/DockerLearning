@@ -17,9 +17,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from DockerLearning.views import hello_view
+from appDockerLearning.views import HelloView, ExpenseView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('hello/', hello_view, name='hello'),
+    path('hello/', HelloView.as_view(), name='hello'),
+    path('expenses/', ExpenseView.as_view(), name='expenses'),
 ]
