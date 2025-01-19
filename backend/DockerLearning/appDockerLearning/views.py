@@ -7,7 +7,7 @@ from .serializers import ExpenseSerializer
 
 class HelloView(APIView):
     def get(self, request):
-        return Response({"message": "Hello from Django + MSSQL!"})
+        return Response({"message": "Hello from Django!"})
 
 class ExpenseView(APIView):
     def get(self, request):
