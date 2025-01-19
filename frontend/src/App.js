@@ -9,7 +9,7 @@ function App() {
   const [expenses, setExpenses] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:8000/hello')
+    axios.get('http://localhost:8000/hello/')
       .then(response => {
         console.log('Odpowiedź z backendu:', response.data); // Debugowanie odpowiedzi
         setMessage(response.data.message || 'Nieoczekiwana odpowiedź z backendu');
