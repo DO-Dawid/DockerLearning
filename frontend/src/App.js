@@ -9,7 +9,7 @@ function App() {
   const [expenses, setExpenses] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:8000/hello/')
+    axios.get('/api/hello/')
       .then(response => {
         console.log('Odpowiedź z backendu:', response.data); // Debugowanie odpowiedzi
         setMessage(response.data.message || 'Nieoczekiwana odpowiedź z backendu');
@@ -25,7 +25,7 @@ function App() {
 
   const fetchExpenses = async () => {
     try {
-      const response = await axios.get('http://localhost:8000/expenses/');
+      const response = await axios.get('/api/expenses/');
       console.log('Wydatki:', response.data); // Debugowanie odpowiedzi
       setExpenses(response.data);
     } catch (error) {
@@ -36,7 +36,7 @@ function App() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:8000/expenses/', {
+      await axios.post('/api/expenses/', {
         description,
         amount,
       });
