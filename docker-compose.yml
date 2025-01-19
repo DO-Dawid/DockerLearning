@@ -5,7 +5,7 @@ services:
     image: mcr.microsoft.com/mssql/server:2022-latest
     container_name: cloud-db
     environment:
-      SA_PASSWORD: "YourStrong_Password123"  # silne hasło!
+      SA_PASSWORD: "YourStrong_Password123"
       ACCEPT_EULA: "Y"
       MSSQL_PID: "Developer"
     ports:
@@ -15,15 +15,13 @@ services:
 
   backend:
     build:
-      context: ./backend
+      context: ./backend/DockerLearning/
       dockerfile: Dockerfile
     container_name: cloud-backend
-    # Najpierw migracje, potem uruchomienie serwera
     command: >
       sh -c "python manage.py migrate &&
              python manage.py runserver 0.0.0.0:8000"
     environment:
-      # Zmienne środowiskowe do konfiguracji DB w Django (settings.py je odczyta)
       DB_NAME: master
       DB_USER: SA
       DB_PASSWORD: "YourStrong_Password123"
