@@ -1,4 +1,4 @@
-FROM python:3.10-slim
+FROM python:3.10-slim-bullseye
 
 ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
@@ -13,9 +13,7 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - && \
 
 RUN rm -f /etc/odbc.ini || true
 
-RUN apt-get remove -y unixodbc unixodbc-common || true
-
-RUN ACCEPT_EULA=Y apt-get install -y msodbcsql17 unixodbc-dev --allow-downgrades --allow-change-held-packages || \
+RUN ACCEPT_EULA=Y apt-get install -y msodbcsql17 unixodbc unixodbc-dev --allow-downgrades --allow-change-held-packages || \
     dpkg --configure -a
 
 WORKDIR /app
